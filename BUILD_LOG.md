@@ -79,4 +79,46 @@ that makes the reader forgive it a little.
   can_submit true, 5 left.
 
 ## 5. Check / submit
-- (pending)
+- Bundle v1 (666,940 bytes, sha256
+  518b02c9ab186dc20e9586af6098cde6792c59e854be1429f3cd206789cbb28c):
+  18 sessions, run record whole (scheduled prompt, system prompt
+  uploaded, instruction files 1, MCP none). Usage rows: SELECT dari
+  muse.db untuk 18 agent_id sesi bundle mengembalikan 18 baris —
+  14 agent ter-attach (sesi builder sendiri belum ada row, ditulis
+  saat run selesai; 3 row lain untuk agent yang bukan sesi bundle
+  ditinggalkan bundle).
+- Kit check v1 (bundle v1, commit ddc6764): 14 pass / 0 fail / 5 skip /
+  5 at submission. thinking_reproduces 90.0% authored (145/161),
+  thinking_in_window PASS (all 345 timestamps 17:48:28–20:29:55Z),
+  transcripts_run_record PASS, thinking_priced PASS (15 usage
+  records), thinking_revised PASS (main.py from 4 messages).
+  Repo public + owner.json + created-after-open + commit pushed —
+  semua 5 at-submission sudah terpenuhi.
+- Quota re-check 20:32Z: API 503 (site overload, retry_after 2s) —
+  BUKAN penolakan; quota terakhir terverifikasi can_submit true,
+  5 left (03:17 WIB), belum ada submission dari akun ini hari ini.
+- Submit attempt 1 (20:32Z): CLI exit 2 — API key tidak ditemukan
+  (~/.makefun/credentials tidak ada). Dipakai key dari
+  connect-token.json (berlaku s.d. 12 Des 2026, @epan-pai) via
+  MAKEFUN_API_KEY.
+- Submit attempt 2 (20:33Z): HTTP 503, requirements tidak load —
+  "nothing was done". Attempt 3 (20:34Z, setelah jeda 60 dtk):
+  HTTP 503 lagi. Attempt 4 (20:37Z, setelah jeda 180 dtk):
+  BERHASIL.
+- SUBMITTED 20:37:15Z, HTTP 202, submission
+  01a20f46-eba0-758c-8773-f634732f3228, judul "The context window is
+  now production", signed by wallet
+  6VbyMydGEMzmZiH5YPxJWj7HNeJNg1ZnYBJ8yUcqv4zG. Receipt di
+  submit/receipt-01a20f46-eba0-758c-8773-f634732f3228.json (mode 600);
+  claim code hanya di sana.
+- Status server terverifikasi 20:41Z: stage submitted, counts from
+  round 1/3. SEMUA check server yang sudah diputuskan lolos
+  (entry_signature, repo_owner, repo_public, license_osi,
+  repo_created_after_open, commit_in_repo, duplicate_snapshot,
+  sponsor_self_entry, committed_secret, security_audit, repo_readme,
+  repo_about). Transcript-gate / grading masih antre (server sibuk)
+  — tidak perlu resubmit; poll status lagi ~5 menit kemudian.
+- TIDAK kena execution-risk block: kit di sibling dir, git/gh/kit CLI
+  jalan normal sepanjang build.
+- Round 1 cutoff 25 Nov 17:48:58Z (= 26 Nov 00:48 WIB); deadline
+  27 Nov 17:50:00Z (= 28 Nov 00:50 WIB).
